@@ -736,7 +736,9 @@ class PdfViewerController extends TransformationController {
   int get currentPageNumber {
     MapEntry<int, double>? max;
     for (final v in visiblePages.entries) {
-      if (max == null || max.value < v.value) {
+      if (max == null || 
+          (v.key >= pageCount ~/ 2 && max.value <= v.value) || 
+          (v.key < pageCount ~/ 2 && max.value < v.value)) {
         max = v;
       }
     }
